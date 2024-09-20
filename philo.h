@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/09/20 17:25:20 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:49:28 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,11 @@ void					error_exit(const char *error);
 
 // parsing.c //
 void					parse_input(t_data *data, char **argv);
+
+// safe_functions.c //
+void *safe_malloc(size_t bytes);
+void safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
+void safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+
 
 #endif PHILO_H
