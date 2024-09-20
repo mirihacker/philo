@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philosopher.h                                      :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/09/20 14:11:40 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:25:20 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,27 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h> //write, usleep
+#include <errno.h>
+
+# define STD "\033[0m"
+# define RED "\033[1;31m"
+# define G "\033[1;32m"
+# define Y "\033[1;33m"
+# define B "\033[1;34m"
+# define M "\033[1;35m"
+# define C "\033[1;36m"
+# define W "\033[1;37m"
+
+typedef enum e_opcode
+{
+	LOCK,
+	UNLOCK,
+	INIT,
+	DESTROY,
+	CREATE,
+	JOIN,
+	DETACH,
+}						t_opcode;
 
 /*
 ** number_of_philo      time_to_die     time_to_eat     time_to_sleep       number_of_times_each_philo_eat
@@ -58,5 +79,11 @@ typedef struct s_data
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
+
+// utils.c //
+void					error_exit(const char *error);
+
+// parsing.c //
+void					parse_input(t_data *data, char **argv);
 
 #endif PHILO_H
