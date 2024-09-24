@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/09/20 17:49:28 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:17:57 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_data
 	long nbr_limit_meals; // flag and value
 	long				start_simulation;
 	bool end_simulation; // philo dies, or all philos full
+	bool all_threads_ready; //synchro philo
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
@@ -91,5 +92,7 @@ void *safe_malloc(size_t bytes);
 void safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 void safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
 
+//init.c //
+void data_init(t_data *data);
 
 #endif PHILO_H
