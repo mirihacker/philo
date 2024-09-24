@@ -6,13 +6,14 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/09/24 15:17:57 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/09/24 16:37:04 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <errno.h>
 # include <limits.h>
 # include <pthread.h> //mutex, threads
 # include <stdbool.h>
@@ -20,7 +21,6 @@
 # include <stdlib.h>
 # include <sys/time.h>
 # include <unistd.h> //write, usleep
-#include <errno.h>
 
 # define STD "\033[0m"
 # define RED "\033[1;31m"
@@ -41,6 +41,13 @@ typedef enum e_opcode
 	JOIN,
 	DETACH,
 }						t_opcode;
+
+typedef enum e_time_code
+{
+	SECOND,
+	MILISECOND,
+	MICROSECOND,
+}						t_time_code;
 
 /*
 ** number_of_philo      time_to_die     time_to_eat     time_to_sleep       number_of_times_each_philo_eat
@@ -75,24 +82,38 @@ typedef struct s_data
 	long				time_to_sleep;
 	long nbr_limit_meals; // flag and value
 	long				start_simulation;
-	bool end_simulation; // philo dies, or all philos full
-	bool all_threads_ready; //synchro philo
+	bool end_simulation;    // philo dies, or all philos full
+	bool all_threads_ready; // synchro philo
+	t_mtx data_mutex;       // avoid races while reading data
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
 
 // utils.c //
 void					error_exit(const char *error);
+long					gettime(t_time_code time_code);
+void					precise_usleep(long usec, t_data *data);
 
 // parsing.c //
 void					parse_input(t_data *data, char **argv);
 
 // safe_functions.c //
-void *safe_malloc(size_t bytes);
-void safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
-void safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data, t_opcode opcode);
+void					*safe_malloc(size_t bytes);
+void					safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
+void					safe_thread_handle(pthread_t *thread,
+							void *(*foo)(void *), void *data, t_opcode opcode);
 
-//init.c //
-void data_init(t_data *data);
+// init.c //
+void					data_init(t_data *data);
+
+// getters and setters //
+void					set_bool(t_mtx *mutex, bool *dest, bool value);
+bool					get_bool(t_mtx *mutex, bool *value);
+void					set_long(t_mtx *mutex, long *dest, long value);
+long					get_long(t_mtx *mutex, long *value);
+bool					simulation_finished(t_data *data);
+
+// synchro_utlis.c //
+void					wait_all_threads(t_data *data);
 
 #endif PHILO_H
