@@ -34,6 +34,8 @@ void	*dinner_simulation(void *data)
 			break ;
 		eat(philo);
 		// 3) sleep ->write_status & precise usleep
+		// 4) think
+		thinking(philo); // TODO
 	}
 	return (NULL);
 }

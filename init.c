@@ -53,6 +53,7 @@ void	data_init(t_data *data)
 	data->all_threads_ready = false;
 	data->philos = safe_malloc(sizeof(t_philo) * data->philo_nbr);
 	safe_mutex_handle(&data->data_mutex, INIT);
+	safe_mutex_handle(&data->write_mutex, INT);
 	data->forks = safe_malloc(sizeof(t_fork) * data->philo_nbr);
 	while (i < data->philo_nbr)
 	{

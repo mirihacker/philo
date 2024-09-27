@@ -31,6 +31,16 @@
 # define C "\033[1;36m"
 # define W "\033[1;37m"
 
+typedef enum e_status
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	TAKE_FIRST_FORK,
+	TAKE_SECOND_FORK,
+	DEAD,
+} t_status;
+
 typedef enum e_opcode
 {
 	LOCK,
@@ -85,6 +95,7 @@ typedef struct s_data
 	bool end_simulation;    // philo dies, or all philos full
 	bool all_threads_ready; // synchro philo
 	t_mtx data_mutex;       // avoid races while reading data
+	t_mtx write_mutex;
 	t_fork				*forks;
 	t_philo				*philos;
 }						t_data;
