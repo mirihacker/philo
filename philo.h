@@ -31,6 +31,8 @@
 # define C "\033[1;36m"
 # define W "\033[1;37m"
 
+# define DEBUGG_MODE 0
+
 typedef enum e_status
 {
 	EATING,
@@ -78,9 +80,10 @@ typedef struct s_philo
 	long				meals_num;
 	bool				full;
 	long				last_meal_time;
-	t_fork				*left_fork;
-	t_fork				*right_fork;
+	t_fork				*first_fork;
+	t_fork				*second_fork;
 	pthread_t			thread_id;
+	t_mtx philo_mutex;
 	t_data				*data;
 }						t_philo;
 
@@ -94,6 +97,7 @@ typedef struct s_data
 	long				start_simulation;
 	bool end_simulation;    // philo dies, or all philos full
 	bool all_threads_ready; // synchro philo
+	pthread	monitor;
 	t_mtx data_mutex;       // avoid races while reading data
 	t_mtx write_mutex;
 	t_fork				*forks;
@@ -126,5 +130,8 @@ bool					simulation_finished(t_data *data);
 
 // synchro_utlis.c //
 void					wait_all_threads(t_data *data);
+
+// write.c //
+void write_status(t_status status, t_philo *philo, bool debug);
 
 #endif PHILO_H

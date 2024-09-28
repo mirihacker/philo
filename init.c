@@ -19,7 +19,7 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_pos)
 	philo_nbr = philo->data->philo_nbr;
 	philo->right_fork = &forks[(philo_pos + 1) % philo_nbr];
 	philo->left_fork = &forks[philo_pos];
-	if (philo->id % 2)
+	if (philo->id % 2 == 0)
 	{
 		philo->right_fork = &forks[philo_pos];
 		philo->left_fork = &forks[(philo_pos + 1) % philo_nbr];
@@ -39,6 +39,7 @@ static void	philo_init(t_data *data)
 		philo->meals_num = 0;
 		philo->full = false;
 		philo->data = data;
+		safe_mutex_handle(&philo->philo_mutex, INIT);
 		assign_forks(philo, data->forks, i);
 		i++;
 	}

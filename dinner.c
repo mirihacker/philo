@@ -12,6 +12,36 @@
 
 #include "philo.h"
 
+static void thinking(t_philo *philo)
+{
+	write_status(THINKING, philo, DEBUG_MODE);
+}
+
+/*
+** eat routine
+** 1. Grab the forks: here first & second fork is taken
+** 2. Eat: write eat, update last meal, update meals counter
+	eventually bool FULL
+** 3. Release the forks
+*/
+
+static void eat(t_philo *philo)
+{
+	safe_mutex_handle(&philo->first_fork->fork, LOCK);
+	write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
+	safe_mutex_handle(&philo, second_fork->fork, LOCK);
+	write_status(TAKE_SECOND_FORK, philo, DEBUG_MODE);
+	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
+	philo->meals_num++;
+	write_status(EATING, philo, DEBUG_MODE);
+	precise_usleep(philo->data->time_to_eat, philo->data);
+	if (philo->data->nbr_limit_meals > 0 
+		&& philo->meals_num == philo->data->nbr_limit_meals)
+		set_bool(&philo->philo_mutex, &philo->full, true);
+	safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
+	safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
+}
+
 /* 0. If no meals, return ->[0]
 **      0.1. If only 1 philo
 ** 1. Create all threads, all philos
@@ -34,6 +64,8 @@ void	*dinner_simulation(void *data)
 			break ;
 		eat(philo);
 		// 3) sleep ->write_status & precise usleep
+		write_status(SLEEPING, philo, DEBUGG_MODE);
+		precise_usleep(philo->data->time_to_sleep, philo->data);
 		// 4) think
 		thinking(philo); // TODO
 	}
@@ -55,6 +87,8 @@ void	dinner_start(t_data *data)
 			safe_thread_handle(&data->philos[i].thread_id, dinner_simulation,
 				&data->philos[i], CREATE);
 	}
+	// Monitor
+	safe_thread_handle(&data->monitor, monitor_dinner, data, CREATE);
 	// Start Simulation
 	data->start_simulation = gettime(MILISECOND);
 	// now all threads are ready!
