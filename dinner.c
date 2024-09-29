@@ -75,8 +75,7 @@ void	*dinner_simulation(void *data)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	// synchro with monitor
 	// increase a table variable counter, with all threads running
-	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr); //TODO
-
+	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full) // TODO thread safe?
@@ -86,7 +85,7 @@ void	*dinner_simulation(void *data)
 		write_status(SLEEPING, philo, DEBUGG_MODE);
 		precise_usleep(philo->data->time_to_sleep, philo->data);
 		// 4) think
-		thinking(philo); // TODO
+		thinking(philo);
 	}
 	return (NULL);
 }
