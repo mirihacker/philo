@@ -78,6 +78,8 @@ static long	ft_atol(const char *str)
 void	parse_input(t_data *data, char **argv)
 {
 	data->philo_nbr = ft_atol(argv[1]);
+	if (data->philo_nbr <= 0)
+		error_exit("Number of philo bigger than 0");
 	data->time_to_die = ft_atol(argv[2]) * 1e3;
 	data->time_to_eat = ft_atol(argv[3]) * 1e3;
 	data->time_to_sleep = ft_atol(argv[4]) * 1e3;
