@@ -56,7 +56,7 @@ void	safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 	else if (opcode == INIT)
 		handle_mutex_error(pthread_mutex_init(mutex, NULL), opcode);
 	else if (opcode == DESTROY)
-		handler_mutex_error(pthread_mutex_destroy(mutex), opcode);
+		handle_mutex_error(pthread_mutex_destroy(mutex), opcode);
 	else
 		error_exit("Wrong opcode for mutex");
 }

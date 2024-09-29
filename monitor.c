@@ -1,6 +1,6 @@
 #include "philo.h"
 
-static void philo_died(t_philo *philo)
+static bool philo_died(t_philo *philo)
 {
     long elapsed;
     long t_to_die;
@@ -17,21 +17,22 @@ static void philo_died(t_philo *philo)
 void *monitor_dinner(void *data)
 {
     t_data *table;
+    int i;
 
     table = (t_data *)data;
     //spinlock till all threads run
-    while (!all_threads_running(&data->data_mutex, &data->threads_running_nbr,
-            data->philo_nbr))
+    while (!all_threads_running(&table->data_mutex, &table->threads_running_nbr,
+            table->philo_nbr))
     ;
     while (!simulation_finished(data))
     {
         i = -1;
-        while (++i < data->philo_nbr)
+        while (++i < table->philo_nbr)
         {
-            if (philo_died(data->philos + i))
+            if (philo_died(table->philos + i))
             {
-                set_bool(&data->data_mutex, &data->end_simulation, true);
-                write_status(DIED, data->philos + i, DEBUG_MODE);
+                set_bool(&table->data_mutex, &table->end_simulation, true);
+                write_status(DEAD, table->philos + i, DEBUGG_MODE);
             }
         }
     }

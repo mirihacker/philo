@@ -14,19 +14,21 @@
 
 void *lone_philo(void *arg)
 {
+	t_philo *philo;
+
 	philo = (t_philo *)arg;
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
-	write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
+	write_status(TAKE_FIRST_FORK, philo, DEBUGG_MODE);
 	while (!simulation_finished(philo->data))
-		usleep(200);
+		sleep(200);
 	return (NULL);
 }
 
 static void thinking(t_philo *philo)
 {
-	write_status(THINKING, philo, DEBUG_MODE);
+	write_status(THINKING, philo, DEBUGG_MODE);
 }
 
 /*
@@ -40,12 +42,12 @@ static void thinking(t_philo *philo)
 static void eat(t_philo *philo)
 {
 	safe_mutex_handle(&philo->first_fork->fork, LOCK);
-	write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
-	safe_mutex_handle(&philo, second_fork->fork, LOCK);
-	write_status(TAKE_SECOND_FORK, philo, DEBUG_MODE);
+	write_status(TAKE_FIRST_FORK, philo, DEBUGG_MODE);
+	safe_mutex_handle(&philo->second_fork->fork, LOCK);
+	write_status(TAKE_SECOND_FORK, philo, DEBUGG_MODE);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	philo->meals_num++;
-	write_status(EATING, philo, DEBUG_MODE);
+	write_status(EATING, philo, DEBUGG_MODE);
 	precise_usleep(philo->data->time_to_eat, philo->data);
 	if (philo->data->nbr_limit_meals > 0 
 		&& philo->meals_num == philo->data->nbr_limit_meals)

@@ -26,7 +26,7 @@ void	precise_usleep(long usec, t_data *data)
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1e3)
-			usleep(usec / 2);
+			sleep(usec / 2);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)
