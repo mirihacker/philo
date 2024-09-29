@@ -52,6 +52,23 @@ long	gettime(t_time_code time_code)
 	return (1337);
 }
 
+void clean(t_data *data)
+{
+	t_philo *philo;
+	int i;
+	
+	i = -1;
+	while (++i < data->philo_nbr)
+	{
+		philo = data->philos + i;
+		safe_mutex_handle(&philo->philo_mutex, DESTROY);
+	}
+	safe_mutex_handle(&data->write_mutex, DESTROY);
+	safe_mutex_handle(&data->data_mutex, DESTROY);
+	free(data->forks);
+	free(data->philos);
+}
+
 void	error_exit(const char *error)
 {
 	printf(RED "%s\n" STD, error);

@@ -117,4 +117,6 @@ void	dinner_start(t_data *data)
 	while (++i < data->philo_nbr)
 		safe_thread_handle(&data->philos[i].thread_id, NULL, NULL, JOIN);
 	// when this line, all philos are full
+	set_bool(&data->data_mutex, &data->end_simulation, true);
+	safe_thread_handle(&data->monitor, NULL, NULL, JOIN);
 }

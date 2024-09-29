@@ -109,6 +109,7 @@ typedef struct s_data
 void					error_exit(const char *error);
 long					gettime(t_time_code time_code);
 void					precise_usleep(long usec, t_data *data);
+void clean(t_data *data);
 
 // parsing.c //
 void					parse_input(t_data *data, char **argv);
