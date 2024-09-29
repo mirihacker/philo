@@ -19,8 +19,11 @@ int	main(int argc, char **argv)
 	if (argc == 5 || argc == 6)
 	{
 		parse_input(&data, argv);
+		printf("Parsing done!\n");
 		data_init(&data);
+		printf("Data Init done!\n");
 		dinner_start(&data);
+		printf("Dinner Simulation done!\n");
 		clean(&data);
 	}
 	else

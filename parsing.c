@@ -46,11 +46,14 @@ static const char	*valid_input(const char *str)
 		++str;
 	else if (*str == '-')
 		error_exit("Only positive numbers");
-	if (!is_digit)
+	if (!is_digit(*str))
 		error_exit("Not correct digit");
 	nbr = str;
 	while (is_digit(*str))
+	{
 		++len;
+		++str;
+	}
 	if (len > 10)
 		error_exit("Value too big");
 	return (nbr);

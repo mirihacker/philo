@@ -21,7 +21,6 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int philo_pos)
 	philo->second_fork = &forks[philo_pos];
 	if (philo->id % 2 == 0)
 	{
-		sleep(100);
 		philo->first_fork = &forks[philo_pos];
 		philo->second_fork = &forks[(philo_pos + 1) % philo_nbr];
 	}

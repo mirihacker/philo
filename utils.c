@@ -25,32 +25,34 @@ void	precise_usleep(long usec, t_data *data)
 			break ;
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
-		if (rem > 1e3)
-			sleep(rem / 2);
+		if (rem > 1000)
+			sleep((rem / 2)/1000);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)
-				;
+				sleep(10/1000);
 		}
 	}
 }
 
 long	gettime(t_time_code time_code)
 {
-	struct timeval	tv;
+    struct timeval	time;
+    long            result;
 
-	if (gettimeofday(&tv, NULL))
-		error_exit("Gettimeofday failed");
-	if (time_code == SECOND)
-		return (tv.tv_sec + (tv.tv_usec / 1e6));
-	else if (time_code == MILISECOND)
-		return ((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
-	else if (time_code == MICROSECOND)
-		return ((tv.tv_sec * 1e6) + (tv.tv_usec));
-	else
-		error_exit("Wrong input to gettime!");
-	return (1337);
+    if (gettimeofday(&time, NULL))
+        error_exit("Gettimeofday failed");
+    if (time_code == SECOND)
+		return(time.tv_sec);
+    else if (time_code == MILISECOND)
+        return((time.tv_sec * 1000) + (time.tv_usec / 1000));
+    else if (time_code == MICROSECOND)
+        return((time.tv_sec * 1000000) + time.tv_usec);
+    else
+        error_exit("Wrong input to gettime!");
+    return (0);
 }
+
 
 void clean(t_data *data)
 {

@@ -22,7 +22,7 @@ void *lone_philo(void *arg)
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
 	write_status(TAKE_FIRST_FORK, philo, DEBUGG_MODE);
 	while (!simulation_finished(philo->data))
-		sleep(200);
+		sleep(0.2);
 	return (NULL);
 }
 
