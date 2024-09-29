@@ -52,6 +52,7 @@ void	data_init(t_data *data)
 	i = 0;
 	data->end_simulation = false;
 	data->all_threads_ready = false;
+	data->threads_running_nbr = 0;
 	data->philos = safe_malloc(sizeof(t_philo) * data->philo_nbr);
 	safe_mutex_handle(&data->data_mutex, INIT);
 	safe_mutex_handle(&data->write_mutex, INT);

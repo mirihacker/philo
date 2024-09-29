@@ -97,6 +97,7 @@ typedef struct s_data
 	long				start_simulation;
 	bool end_simulation;    // philo dies, or all philos full
 	bool all_threads_ready; // synchro philo
+	long 	threads_running_nbr;
 	pthread	monitor;
 	t_mtx data_mutex;       // avoid races while reading data
 	t_mtx write_mutex;
@@ -130,8 +131,18 @@ bool					simulation_finished(t_data *data);
 
 // synchro_utlis.c //
 void					wait_all_threads(t_data *data);
+bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr);
+void increase_long(t_mtx *mutex, long *value);
 
 // write.c //
 void write_status(t_status status, t_philo *philo, bool debug);
+
+// monitor.c //
+void *monitor_dinner(void *data);
+
+// dinner.c //
+void *lone_philo(void *arg);
+void	*dinner_simulation(void *data);
+void	dinner_start(t_data *data);
 
 #endif PHILO_H

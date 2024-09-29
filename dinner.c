@@ -12,6 +12,18 @@
 
 #include "philo.h"
 
+void *lone_philo(void *arg)
+{
+	philo = (t_philo *)arg;
+	wait_all_threads(philo->data);
+	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
+	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
+	write_status(TAKE_FIRST_FORK, philo, DEBUG_MODE);
+	while (!simulation_finished(philo->data))
+		usleep(200);
+	return (NULL);
+}
+
 static void thinking(t_philo *philo)
 {
 	write_status(THINKING, philo, DEBUG_MODE);
@@ -58,6 +70,11 @@ void	*dinner_simulation(void *data)
 
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
+	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
+	// synchro with monitor
+	// increase a table variable counter, with all threads running
+	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr); //TODO
+
 	while (!simulation_finished(philo->data))
 	{
 		if (philo->full) // TODO thread safe?
@@ -80,7 +97,7 @@ void	dinner_start(t_data *data)
 	if (data->nbr_limit_meals == 0)
 		return ;
 	else if (data->philo_nbr == 1)
-		; // TO DO
+		safe_thread_handle(&data->philos[0].thread_id, lone_philo, &data->philos[0], CREATE); // TO DO
 	else
 	{
 		while (++i < data->philo_nbr)
