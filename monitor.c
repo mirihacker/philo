@@ -35,5 +35,6 @@ void *monitor_dinner(void *data)
                 write_status(DEAD, table->philos + i, DEBUGG_MODE);
             }
         }
+        sleep(10/1000);
     }
 }

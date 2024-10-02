@@ -98,6 +98,7 @@ typedef struct s_data
 	bool end_simulation;    // philo dies, or all philos full
 	bool all_threads_ready; // synchro philo
 	long 	threads_running_nbr;
+	long start_time;
 	pthread_t	monitor;
 	t_mtx data_mutex;       // avoid races while reading data
 	t_mtx write_mutex;

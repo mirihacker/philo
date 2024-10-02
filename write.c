@@ -29,7 +29,7 @@ void write_status(t_status status, t_philo *philo, bool debug)
 {
     long elapsed;
 
-    elapsed = gettime(MILISECOND);
+    elapsed = gettime(MILISECOND) - philo->data->start_time;
 
     if (philo->full)
         return ;
