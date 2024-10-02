@@ -23,12 +23,14 @@ void *monitor_dinner(void *data)
     //spinlock till all threads run
     while (!all_threads_running(&table->data_mutex, &table->threads_running_nbr,
             table->philo_nbr))
-    ;
-    while (!simulation_finished(data))
+        ;
+    while (!simulation_finished(table))
     {
         i = -1;
         while (++i < table->philo_nbr)
         {
+            if (simulation_finished(table))
+                return (NULL);
             if (philo_died(table->philos + i))
             {
                 set_bool(&table->data_mutex, &table->end_simulation, true);
@@ -37,4 +39,5 @@ void *monitor_dinner(void *data)
         }
         sleep(10/1000);
     }
+    return (NULL);
 }
