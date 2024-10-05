@@ -19,7 +19,7 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/time.h>
+# include <sys/time.h> //struct timeval
 # include <unistd.h> //write, usleep
 
 # define STD "\033[0m"

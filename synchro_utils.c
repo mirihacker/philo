@@ -12,11 +12,18 @@
 
 #include "philo.h"
 
+/*
+** busy-wait loop to wait for all threads to be ready
+*/
+
 void	wait_all_threads(t_data *data)
 {
 	while (!get_bool(&data->data_mutex, &data->all_threads_ready))
 		;
 }
+/*
+** checks if the number of threads is the number of philos 
+*/
 
 bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 {
@@ -29,6 +36,10 @@ bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 	safe_mutex_handle(mutex, UNLOCK);
 	return (ret);
 }
+
+/*
+** safely increases a long value
+*/
 
 void increase_long(t_mtx *mutex, long *value)
 {

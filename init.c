@@ -11,6 +11,12 @@
 /* ************************************************************************** */
 
 #include "philo.h"
+/*
+** assigns the forks to the philosophers
+** to avoid deadlocks odd/even fork picking
+** first fork next pos, second fork current pos
+** other way for even philos
+*/
 
 static void	assign_forks(t_philo *philo, t_fork *forks, int philo_pos)
 {
@@ -44,6 +50,9 @@ static void	philo_init(t_data *data)
 		i++;
 	}
 }
+/*
+** data initialize and philo structs
+*/
 
 void	data_init(t_data *data)
 {

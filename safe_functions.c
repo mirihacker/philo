@@ -40,7 +40,7 @@ static void	handle_mutex_error(int status, t_opcode opcode)
 		error_exit("Mutex is locked");
 }
 
-/* MUTEX SAFE
+/* MUTEX
 ** init
 ** destroy
 ** lock
@@ -62,7 +62,9 @@ void safe_mutex_handle(t_mtx *mutex, t_opcode opcode)
 }
 
 
-/* THREADS */
+/*
+** error management, based on error code 
+*/
 
 static void	handle_thread_error(int status, t_opcode opcode)
 {
@@ -81,8 +83,13 @@ static void	handle_thread_error(int status, t_opcode opcode)
 					"specified by the given thread ID, thread");
 	else if (status == EDEADLK)
 		error_exit("A deadlock was detected or the value of"
-					"   thread specifes the calling thread");
+					"thread specifes the calling thread");
 }
+
+/*
+** handles thread operations
+** creating, joining, detaching
+*/
 
 void	safe_thread_handle(pthread_t *thread, void *(*foo)(void *), void *data,
 		t_opcode opcode)

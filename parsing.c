@@ -23,15 +23,11 @@ static inline bool	is_space(char c)
 }
 
 /*
-** 1) check for negatives
-** 2) check if the number is legit
-**      "     +777$%" --> correct
-**      "    +&%42" --> incorrect
-** 3) check for INT_MAX
-**      check for len 2_147_483_647 if len > 10, sure > INT_MAX
-**      (2_147_483_647 -> 9_999_999_999) still to chek
-**
-**      Return pointer to the digit to start processing
+** Verifies that the input value is correct,
+** skips white space, checks for negative,
+** an acceptable number (+77$%)
+** checks for INT_MAX
+** Returns pointer to the digit to start processing
 */
 
 static const char	*valid_input(const char *str)
@@ -62,20 +58,24 @@ static const char	*valid_input(const char *str)
 static long	ft_atol(const char *str)
 {
 	long	num;
+	const char *start;
 
 	num = 0;
-	str = valid_input(str);
-	while (is_digit(*str))
-		num = (num * 10) + (*str++ - 48);
-	if (num > INT_MAX)
-		error_exit("Value too big");
+	start = valid_input(str);
+	while (*start && is_digit(*start))
+	{
+		if (num > (INT_MAX / 10) || (num == (INT_MAX / 10) && (*start - '0') > (INT_MAX % 10)))
+            error_exit("Value too big");
+		num = (num * 10) + (*start - '0');
+		++start;
+	}
 	return (num);
 }
 
 /*
-** 1) actual numbers
-** 2) not > INT_MAX
-** 3) timestamps > 60ms
+** checks for numbers smaller than INT_MAX
+** and timestamps > 60ms
+** converts to ms
 */
 
 void	parse_input(t_data *data, char **argv)
