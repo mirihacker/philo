@@ -6,15 +6,15 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:50:03 by smiranda          #+#    #+#             */
-/*   Updated: 2024/09/24 16:36:26 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/07 14:37:25 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void *lone_philo(void *arg)
+void	*lone_philo(void *arg)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	wait_all_threads(philo->data);
@@ -26,7 +26,7 @@ void *lone_philo(void *arg)
 	return (NULL);
 }
 
-static void thinking(t_philo *philo)
+static void	thinking(t_philo *philo)
 {
 	write_status(THINKING, philo, DEBUGG_MODE);
 }
@@ -39,7 +39,7 @@ static void thinking(t_philo *philo)
 ** 3. Release the forks
 */
 
-static void eat(t_philo *philo)
+static void	eat(t_philo *philo)
 {
 	safe_mutex_handle(&philo->first_fork->fork, LOCK);
 	write_status(TAKE_FIRST_FORK, philo, DEBUGG_MODE);
@@ -49,7 +49,7 @@ static void eat(t_philo *philo)
 	philo->meals_num++;
 	write_status(EATING, philo, DEBUGG_MODE);
 	precise_usleep(philo->data->time_to_eat, philo->data);
-	if (philo->data->nbr_limit_meals > 0 
+	if (philo->data->nbr_limit_meals > 0
 		&& philo->meals_num == philo->data->nbr_limit_meals)
 		set_bool(&philo->philo_mutex, &philo->full, true);
 	safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
@@ -73,18 +73,14 @@ void	*dinner_simulation(void *data)
 	philo = (t_philo *)data;
 	wait_all_threads(philo->data);
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
-	// synchro with monitor
-	// increase a table variable counter, with all threads running
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
 	while (!simulation_finished(philo->data))
 	{
-		if (philo->full) // TODO thread safe?
+		if (philo->full)
 			break ;
 		eat(philo);
-		// 3) sleep ->write_status & precise usleep
 		write_status(SLEEPING, philo, DEBUGG_MODE);
 		precise_usleep(philo->data->time_to_sleep, philo->data);
-		// 4) think
 		thinking(philo);
 	}
 	return (NULL);
@@ -98,7 +94,8 @@ void	dinner_start(t_data *data)
 	if (data->nbr_limit_meals == 0)
 		return ;
 	else if (data->philo_nbr == 1)
-		safe_thread_handle(&data->philos[0].thread_id, lone_philo, &data->philos[0], CREATE); // TO DO
+		safe_thread_handle(&data->philos[0].thread_id, lone_philo,
+			&data->philos[0], CREATE);
 	else
 	{
 		while (++i < data->philo_nbr)
