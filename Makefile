@@ -6,7 +6,7 @@
 #    By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:47:36 by smiranda          #+#    #+#              #
-#    Updated: 2024/10/08 14:08:40 by smiranda         ###   ########.fr        #
+#    Updated: 2024/10/08 14:15:26 by smiranda         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRCS = dinner.c\
 		utils.c\
 		write.c\
 
-OBJS = ${SRCS: .c=.o}
+OBJS = ${SRCS:.c=.o}
 CC = cc
 RM = rm -rf
 CFLAGS = -Wall -Wextra -Werror
