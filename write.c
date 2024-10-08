@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:39:53 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:47 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:09:08 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void write_status_debug(t_status status, t_philo *philo, long elapsed)
         philo->second_fork->fork_id);
     else if (status == EATING && !simulation_finished(philo->data))
         printf(W"%ld"STD" %d is eating"
-        "\t\t\tn°"Y"%d\n"STD, elapsed, philo->id, philo->meals_num);
+        "\t\t\tn°"Y"%ld\n"STD, elapsed, philo->id, philo->meals_num);
     else if (status == SLEEPING && !simulation_finished(philo->data))
             printf(W"%ld"STD" %d is sleeping\n", elapsed, philo->id);
     else if (status == THINKING && !simulation_finished(philo->data))

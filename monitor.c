@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:39:29 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:33 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:10:14 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void *monitor_dinner(void *data)
                 write_status(DEAD, table->philos + i, DEBUGG_MODE);
             }
         }
-        sleep(10/1000);
+        usleep(10);
     }
     return (NULL);
 }

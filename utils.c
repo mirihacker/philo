@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:44:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:45 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:11:20 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	precise_usleep(long usec, t_data *data)
 		elapsed = gettime(MICROSECOND) - start;
 		rem = usec - elapsed;
 		if (rem > 1000)
-			sleep((rem / 2)/1000);
+			usleep(rem / 2);
 		else
 		{
 			while (gettime(MICROSECOND) - start < usec)
-				sleep(10/1000);
+				usleep(10);
 		}
 	}
 }
@@ -38,7 +38,6 @@ void	precise_usleep(long usec, t_data *data)
 long	gettime(t_time_code time_code)
 {
     struct timeval	time;
-    long            result;
 
     if (gettimeofday(&time, NULL))
         error_exit("Gettimeofday failed");

@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:50:03 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:25 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:09:45 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	*lone_philo(void *arg)
 	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
 	write_status(TAKE_FIRST_FORK, philo, DEBUGG_MODE);
 	while (!simulation_finished(philo->data))
-		sleep(0.2);
+		usleep(200);
 	return (NULL);
 }
 
@@ -102,17 +102,12 @@ void	dinner_start(t_data *data)
 			safe_thread_handle(&data->philos[i].thread_id, dinner_simulation,
 				&data->philos[i], CREATE);
 	}
-	// Monitor
 	safe_thread_handle(&data->monitor, monitor_dinner, data, CREATE);
-	// Start Simulation
 	data->start_simulation = gettime(MILISECOND);
-	// now all threads are ready!
 	set_bool(&data->data_mutex, &data->all_threads_ready, true);
-	//  Wait for everyone
 	i = -1;
 	while (++i < data->philo_nbr)
 		safe_thread_handle(&data->philos[i].thread_id, NULL, NULL, JOIN);
-	// when this line, all philos are full
 	set_bool(&data->data_mutex, &data->end_simulation, true);
 	safe_thread_handle(&data->monitor, NULL, NULL, JOIN);
 }
