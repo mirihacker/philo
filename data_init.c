@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:02:34 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:09:54 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:42:51 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	set_data(t_data *data)
 	int	i;
 
 	i = 0;
-	data->end_simulation = false;
+	data->end_sim = false;
 	data->threads_sync = false;
 	data->start_time = gettime(MILISECOND);
 	data->threads_running_nbr = 0;

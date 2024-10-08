@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:44:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:19:49 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:29:50 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ long	gettime(t_time_code time_code)
 		error_exit("Wrong input to gettime!");
 	return (0);
 }
-

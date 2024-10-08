@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:07:59 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 15:49:44 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:42:17 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,14 @@ void	parse_input(t_data *data, char **argv)
 	data->philo_nbr = ft_atol(argv[1]);
 	if (data->philo_nbr <= 0)
 		error_exit("Number of philo bigger than 0");
-	data->time_to_die = ft_atol(argv[2]) * 1000;
-	data->time_to_eat = ft_atol(argv[3]) * 1000;
-	data->time_to_sleep = ft_atol(argv[4]) * 1000;
-	if (data->time_to_die < 60000 || data->time_to_eat < 60000
-		|| data->time_to_sleep < 60000)
+	data->t_die = ft_atol(argv[2]) * 1000;
+	data->t_eat = ft_atol(argv[3]) * 1000;
+	data->t_sleep = ft_atol(argv[4]) * 1000;
+	if (data->t_die < 60000 || data->t_eat < 60000
+		|| data->t_sleep < 60000)
 		error_exit("Timestamps must be bigger than 60ms");
 	if (!argv[5])
-		data->nbr_limit_meals = -1;
+		data->nbr_meals = -1;
 	else
-		data->nbr_limit_meals = ft_atol(argv[5]);
+		data->nbr_meals = ft_atol(argv[5]);
 }

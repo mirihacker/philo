@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:04:13 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 14:30:38 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:36:44 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	handle_thread_error(int status, t_opcode opcode)
 }
 
 /*
-** handles thread operations
+** thread operations
 ** creating, joining, detaching
 */
 

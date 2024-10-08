@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:50:03 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:20:50 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:45:53 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,20 @@ static void	eat(t_philo *philo)
 	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
 	philo->meals_num++;
 	write_status(EATING, philo);
-	ft_usleep(philo->data->time_to_eat, philo->data);
-	if (philo->data->nbr_limit_meals > 0
-		&& philo->meals_num == philo->data->nbr_limit_meals)
+	ft_usleep(philo->data->t_eat, philo->data);
+	if (philo->data->nbr_meals > 0
+		&& philo->meals_num == philo->data->nbr_meals)
 		set_bool(&philo->philo_mutex, &philo->full, true);
 	safe_mutex_handle(&philo->first_fork->fork, UNLOCK);
 	safe_mutex_handle(&philo->second_fork->fork, UNLOCK);
 }
 
-/* 0. If no meals, return ->[0]
-**      0.1. If only 1 philo
-** 1. Create all threads, all philos
-** 2. Create a monitor thread for dead philo
-** 3. Synchronize the beggining of the simulation
-**      pthread_create -> philo starts running!
-**      every philo starts simultaneously
-** 4. Join everyone
+/*
+** routine for dinner with 1+ philo 
+** wait for all threads
+** set time for last_meal
+** counter for philos/threads
+** eat, think, sleep
 */
 
 void	*philo_routine(void *data)
@@ -66,18 +64,26 @@ void	*philo_routine(void *data)
 			break ;
 		eat(philo);
 		write_status(SLEEPING, philo);
-		ft_usleep(philo->data->time_to_sleep, philo->data);
+		ft_usleep(philo->data->t_sleep, philo->data);
 		thinking(philo);
 	}
 	return (NULL);
 }
+
+/*
+** philosopher simulation
+** threats cases with one philo and several
+** creates all threads (philos + monitor)
+** set start sim time, set thread_sync
+** wait for all threads to finish
+*/
 
 void	launch_sim(t_data *data)
 {
 	int	i;
 
 	i = -1;
-	if (data->nbr_limit_meals == 0)
+	if (data->nbr_meals == 0)
 		return ;
 	else if (data->philo_nbr == 1)
 		safe_thread_handle(&data->philos[0].thread_id, single_philo,
@@ -89,11 +95,11 @@ void	launch_sim(t_data *data)
 				&data->philos[i], CREATE);
 	}
 	safe_thread_handle(&data->monitor, monitor_sim, data, CREATE);
-	data->start_simulation = gettime(MILISECOND);
+	data->start_sim = gettime(MILISECOND);
 	set_bool(&data->data_mutex, &data->threads_sync, true);
 	i = -1;
 	while (++i < data->philo_nbr)
 		safe_thread_handle(&data->philos[i].thread_id, NULL, NULL, JOIN);
-	set_bool(&data->data_mutex, &data->end_simulation, true);
+	set_bool(&data->data_mutex, &data->end_sim, true);
 	safe_thread_handle(&data->monitor, NULL, NULL, JOIN);
 }

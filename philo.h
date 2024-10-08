@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:21:12 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:40:11 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,12 @@ typedef struct s_philo
 typedef struct s_data
 {
 	long				philo_nbr;
-	long				time_to_die;
-	long				time_to_eat;
-	long				time_to_sleep;
-	long				nbr_limit_meals;
-	long				start_simulation;
-	bool				end_simulation;
+	long				t_die;
+	long				t_eat;
+	long				t_sleep;
+	long				nbr_meals;
+	long				start_sim;
+	bool				end_sim;
 	bool				threads_sync;
 	long				threads_running_nbr;
 	long				start_time;

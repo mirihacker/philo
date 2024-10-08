@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:30:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 14:20:22 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:43:45 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ long	get_long(t_mtx *mutex, long *value)
 
 bool	simulation_finished(t_data *data)
 {
-	return (get_bool(&data->data_mutex, &data->end_simulation));
+	return (get_bool(&data->data_mutex, &data->end_sim));
 }
