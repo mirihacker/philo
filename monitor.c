@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:39:29 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 14:22:47 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:12:50 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static bool	philo_died(t_philo *philo)
 	return (false);
 }
 
-void	*monitor_dinner(void *data)
+void	*monitor_sim(void *data)
 {
 	t_data	*table;
 	int		i;
@@ -46,7 +46,7 @@ void	*monitor_dinner(void *data)
 			if (philo_died(table->philos + i))
 			{
 				set_bool(&table->data_mutex, &table->end_simulation, true);
-				write_status(DEAD, table->philos + i, DEBUGG_MODE);
+				write_status(DEAD, table->philos + i);
 			}
 		}
 		usleep(10);

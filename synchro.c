@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   synchro_utils.c                                    :+:      :+:    :+:   */
+/*   synchro.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:00:36 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 14:19:21 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:13:37 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 ** busy-wait loop to wait for all threads to be ready
 */
 
-void	wait_all_threads(t_data *data)
+void	wait_threads(t_data *data)
 {
-	while (!get_bool(&data->data_mutex, &data->all_threads_ready))
+	while (!get_bool(&data->data_mutex, &data->threads_sync))
 		;
 }
 /*

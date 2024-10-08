@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 15:07:07 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:21:12 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_data
 	long				nbr_limit_meals;
 	long				start_simulation;
 	bool				end_simulation;
-	bool				all_threads_ready;
+	bool				threads_sync;
 	long				threads_running_nbr;
 	long				start_time;
 	pthread_t			monitor;
@@ -110,10 +110,12 @@ typedef struct s_data
 	t_philo				*philos;
 }						t_data;
 
-// utils.c //
-void					error_exit(const char *error);
+// time_utils.c //
 long					gettime(t_time_code time_code);
-void					precise_usleep(long usec, t_data *data);
+void					ft_usleep(long usec, t_data *data);
+
+// error_exit.c //
+void					error_exit(const char *error);
 void					clean(t_data *data);
 
 // parsing.c //
@@ -125,8 +127,8 @@ void					safe_mutex_handle(t_mtx *mutex, t_opcode opcode);
 void					safe_thread_handle(pthread_t *thread,
 							void *(*foo)(void *), void *data, t_opcode opcode);
 
-// init.c //
-void					data_init(t_data *data);
+// data_init.c //
+void					set_data(t_data *data);
 
 // getters and setters //
 void					set_bool(t_mtx *mutex, bool *dest, bool value);
@@ -135,22 +137,21 @@ void					set_long(t_mtx *mutex, long *dest, long value);
 long					get_long(t_mtx *mutex, long *value);
 bool					simulation_finished(t_data *data);
 
-// synchro_utlis.c //
-void					wait_all_threads(t_data *data);
+// synchro.c //
+void					wait_threads(t_data *data);
 bool					all_threads_running(t_mtx *mutex, long *threads,
 							long philo_nbr);
 void					increase_long(t_mtx *mutex, long *value);
 
 // write.c //
-void					write_status(t_status status, t_philo *philo,
-							bool debug);
+void					write_status(t_status status, t_philo *philo);
 
 // monitor.c //
-void					*monitor_dinner(void *data);
+void					*monitor_sim(void *data);
 
 // dinner.c //
-void					*lone_philo(void *arg);
-void					*dinner_simulation(void *data);
-void					dinner_start(t_data *data);
+void					*single_philo(void *arg);
+void					*philo_routine(void *data);
+void					launch_sim(t_data *data);
 
 #endif
