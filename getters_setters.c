@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:30:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:26 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:20:22 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ bool	get_bool(t_mtx *mutex, bool *value)
 	safe_mutex_handle(mutex, UNLOCK);
 	return (ret);
 }
+
 void	set_long(t_mtx *mutex, long *dest, long value)
 {
 	safe_mutex_handle(mutex, LOCK);

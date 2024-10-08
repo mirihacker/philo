@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:07:59 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:37 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:19:07 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,16 @@ static const char	*valid_input(const char *str)
 
 static long	ft_atol(const char *str)
 {
-	long	num;
-	const char *start;
+	long		num;
+	const char	*start;
 
 	num = 0;
 	start = valid_input(str);
 	while (*start && is_digit(*start))
 	{
-		if (num > (INT_MAX / 10) || (num == (INT_MAX / 10) && (*start - '0') > (INT_MAX % 10)))
-            error_exit("Value too big");
+		if (num > (INT_MAX / 10) || (num == (INT_MAX / 10) && (*start
+					- '0') > (INT_MAX % 10)))
+			error_exit("Value too big");
 		num = (num * 10) + (*start - '0');
 		++start;
 	}

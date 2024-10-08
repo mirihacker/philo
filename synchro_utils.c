@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:00:36 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:43 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:19:21 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void	wait_all_threads(t_data *data)
 		;
 }
 /*
-** checks if the number of threads is the number of philos 
+** checks if the number of threads is the number of philos
 */
 
-bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
+bool	all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 {
-	bool ret;
+	bool	ret;
 
 	ret = false;
 	safe_mutex_handle(mutex, LOCK);
@@ -41,7 +41,7 @@ bool all_threads_running(t_mtx *mutex, long *threads, long philo_nbr)
 ** safely increases a long value
 */
 
-void increase_long(t_mtx *mutex, long *value)
+void	increase_long(t_mtx *mutex, long *value)
 {
 	safe_mutex_handle(mutex, LOCK);
 	(*value)++;

@@ -6,11 +6,12 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:02:34 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/07 14:37:28 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 14:18:45 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
 /*
 ** assigns the forks to the philosophers
 ** to avoid deadlocks odd/even fork picking
@@ -56,7 +57,7 @@ static void	philo_init(t_data *data)
 
 void	data_init(t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->end_simulation = false;
