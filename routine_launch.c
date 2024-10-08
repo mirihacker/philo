@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:50:03 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:45:53 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:50:38 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ void	launch_sim(t_data *data)
 				&data->philos[i], CREATE);
 	}
 	safe_thread_handle(&data->monitor, monitor_sim, data, CREATE);
-	data->start_sim = gettime(MILISECOND);
 	set_bool(&data->data_mutex, &data->threads_sync, true);
 	i = -1;
 	while (++i < data->philo_nbr)

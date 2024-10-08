@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:40:11 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:50:34 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,10 @@ typedef struct s_data
 	long				t_eat;
 	long				t_sleep;
 	long				nbr_meals;
-	long				start_sim;
+	long				start_time;
 	bool				end_sim;
 	bool				threads_sync;
 	long				threads_running_nbr;
-	long				start_time;
 	pthread_t			monitor;
 	t_mtx				data_mutex;
 	t_mtx				write_mutex;
