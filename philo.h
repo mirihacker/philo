@@ -6,7 +6,7 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 13:52:42 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 14:33:49 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 15:07:07 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 # include <errno.h>
 # include <limits.h>
-# include <pthread.h> //mutex, threads
+# include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include <sys/time.h> //struct timeval
-# include <unistd.h>   //write, usleep
+# include <sys/time.h>
+# include <unistd.h>
 
 # define STD "\033[0m"
 # define RED "\033[1;31m"
@@ -62,7 +62,11 @@ typedef enum e_time_code
 }						t_time_code;
 
 /*
-** number_of_philo      time_to_die     time_to_eat     time_to_sleep       number_of_times_each_philo_eat
+** number_of_philo
+** time_to_die
+** time_to_eat
+** time_to_sleep
+** number_of_times_each_philo_eat
 */
 
 typedef pthread_mutex_t	t_mtx;
@@ -93,14 +97,14 @@ typedef struct s_data
 	long				time_to_die;
 	long				time_to_eat;
 	long				time_to_sleep;
-	long nbr_limit_meals; // flag and value
+	long				nbr_limit_meals;
 	long				start_simulation;
-	bool end_simulation;    // philo dies, or all philos full
-	bool all_threads_ready; // synchro philo
+	bool				end_simulation;
+	bool				all_threads_ready;
 	long				threads_running_nbr;
 	long				start_time;
 	pthread_t			monitor;
-	t_mtx data_mutex; // avoid races while reading data
+	t_mtx				data_mutex;
 	t_mtx				write_mutex;
 	t_fork				*forks;
 	t_philo				*philos;
