@@ -6,11 +6,16 @@
 #    By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/08 13:47:36 by smiranda          #+#    #+#              #
-#    Updated: 2024/10/08 16:23:18 by smiranda         ###   ########.fr        #
+#    Updated: 2024/10/08 17:06:17 by smiranda         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
+SRC_DIR = ./src/
+CC = cc
+RM = rm -rf
+CFLAGS = -Wall -Wextra -Werror
+
 SRCS = data_init.c\
 		error_exit.c\
 		getters_setters.c\
@@ -24,10 +29,10 @@ SRCS = data_init.c\
 		time_utils.c\
 		write.c\
 
-OBJS = ${SRCS:.c=.o}
-CC = cc
-RM = rm -rf
-CFLAGS = -Wall -Wextra -Werror
+NEW_SRCS = $(addprefix $(SRC_DIR), $(SRCS))
+
+OBJS = ${NEW_SRCS:%.c=%.o}
+
 
 all: ${NAME}
 

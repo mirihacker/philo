@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 15:30:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:43:45 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:01:43 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 /*
 ** locks the mutex before getting it or retrieving it

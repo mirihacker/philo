@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solo_dinner.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/08 15:59:28 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:11:44 by smiranda         ###   ########.fr       */
+/*   Created: 2024/09/20 14:30:19 by smiranda          #+#    #+#             */
+/*   Updated: 2024/10/08 17:01:49 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
-void	*single_philo(void *arg)
+int	main(int argc, char **argv)
 {
-	t_philo	*philo;
+	t_data	data;
 
-	philo = (t_philo *)arg;
-	wait_threads(philo->data);
-	set_long(&philo->philo_mutex, &philo->last_meal_time, gettime(MILISECOND));
-	increase_long(&philo->data->data_mutex, &philo->data->threads_running_nbr);
-	write_status(TAKE_FIRST_FORK, philo);
-	while (!simulation_finished(philo->data))
-		usleep(200);
-	return (NULL);
+	if (argc == 5 || argc == 6)
+	{
+		parse_input(&data, argv);
+		set_data(&data);
+		launch_sim(&data);
+		clean(&data);
+	}
+	else
+		error_exit("Wrong intput:\n"
+			G "Correct is ./philo 5 800 200 200 [5]" STD);
 }

@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 14:44:27 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:29:50 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:02:26 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 void	ft_usleep(long usec, t_data *data)
 {

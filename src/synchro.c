@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 16:00:36 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:13:37 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:02:21 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 /*
 ** busy-wait loop to wait for all threads to be ready

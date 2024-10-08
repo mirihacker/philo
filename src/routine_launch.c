@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 14:50:03 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:51:11 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:02:07 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 static void	thinking(t_philo *philo)
 {

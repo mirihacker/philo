@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/08 16:16:51 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:17:21 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:01:40 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 void	clean(t_data *data)
 {

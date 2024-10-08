@@ -6,11 +6,11 @@
 /*   By: smiranda <smiranda@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:04:13 by smiranda          #+#    #+#             */
-/*   Updated: 2024/10/08 16:36:44 by smiranda         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:02:12 by smiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../inc/philo.h"
 
 void	*safe_malloc(size_t bytes)
 {
